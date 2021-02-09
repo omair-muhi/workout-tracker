@@ -13,4 +13,20 @@ module.exports = function(app) {
             }
         });
     });
+    // GET last 7 workouts
+    app.get("/api/workouts/range", (req, res) => {
+        Plan.find({}).sort({ day: -1 }).exec((err, docs) => {
+            if (err) {
+                console.log(err);
+            } else {
+                if (docs.length >= 7) {
+                    res.json(docs.slice(0, 7));
+                } else {
+                    // return all workouts if 
+                    // we don't have enough entries
+                    res.json(docs);
+                }
+            }
+        });
+    });
 }

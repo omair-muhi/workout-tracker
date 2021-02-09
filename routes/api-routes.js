@@ -39,4 +39,14 @@ module.exports = function(app) {
                 res.json(err);
             });
     });
+    // PUT for creating new workout
+    app.put("/api/workouts/:id", (req, res) => {
+        Plan.updateOne({ _id: req.params.id }, req.body)
+            .then(dbUser => {
+                res.json(dbUser);
+            })
+            .catch(err => {
+                res.json(err);
+            });
+    });
 }

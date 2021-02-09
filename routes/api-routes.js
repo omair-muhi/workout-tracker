@@ -29,4 +29,14 @@ module.exports = function(app) {
             }
         });
     });
+    // POST for creating new workout
+    app.post("/api/workouts", ({ body }, res) => {
+        Plan.create(body)
+            .then(dbUser => {
+                res.json(dbUser);
+            })
+            .catch(err => {
+                res.json(err);
+            });
+    });
 }

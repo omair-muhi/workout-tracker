@@ -15,6 +15,7 @@ module.exports = function(app) {
     });
     // GET last 7 workouts
     app.get("/api/workouts/range", (req, res) => {
+        console.log("Get last 7 workouts")
         Plan.find({}).sort({ day: -1 }).exec((err, docs) => {
             if (err) {
                 console.log(err);
@@ -31,6 +32,7 @@ module.exports = function(app) {
     });
     // POST for creating new workout
     app.post("/api/workouts", ({ body }, res) => {
+        console.log("Create new workout!");
         Plan.create(body)
             .then(dbUser => {
                 res.json(dbUser);
@@ -41,9 +43,11 @@ module.exports = function(app) {
     });
     // PUT for creating new workout
     app.put("/api/workouts/:id", (req, res) => {
-        Plan.updateOne({ _id: req.params.id }, req.body)
-            .then(dbUser => {
-                res.json(dbUser);
+        console.log("Create new exercise!");
+        Exercise.create(req.body)
+            .then(({ _id }) => Plan.findOneAndUpdate({ _id: req.params.id }, { $push: { exercises: _id } }, { new: true }))
+            .then(dbWorkout => {
+                res.json(dbWorkout);
             })
             .catch(err => {
                 res.json(err);

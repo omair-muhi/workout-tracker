@@ -9,7 +9,7 @@ module.exports = function(app) {
             if (err) {
                 console.log(err);
             } else {
-                res.json(docs[0]);
+                res.json(docs);
             }
         });
     });

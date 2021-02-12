@@ -5,7 +5,7 @@ var Plan = require("../models/Plan.js");
 module.exports = function(app) {
     // GET last workout-plan
     app.get("/api/workouts", (req, res) => {
-        Plan.find({}).sort({ day: -1 }).exec((err, docs) => {
+        Plan.find({}).sort({ day: 1 }).exec((err, docs) => {
             if (err) {
                 console.log(err);
             } else {

@@ -47,7 +47,14 @@ module.exports = function(app) {
         Exercise.create(req.body)
             .then(({ _id }) => Plan.findOneAndUpdate({ _id: req.params.id }, { $push: { exercises: _id } }, { new: true }))
             .then(dbWorkout => {
-                res.json(dbWorkout);
+                console.log("New Exercise Duration", req.body.duration);
+                console.log("Current Total Duration:", dbWorkout.totalDuration);
+                let newTotalDuration = req.body.duration + dbWorkout.totalDuration;
+                console.log("New Total Duration:", newTotalDuration);
+                Plan.findOneAndUpdate({ _id: req.params.id }, { totalDuration: newTotalDuration }, (err, plan) => {
+                    if (err) console.log(err);
+                    res.json(plan);
+                });
             })
             .catch(err => {
                 res.json(err);

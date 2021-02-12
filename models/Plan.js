@@ -7,6 +7,10 @@ const PlanSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    totalDuration: {
+        type: Number,
+        default: 0
+    },
     exercises: [{
         type: Schema.Types.ObjectId,
         ref: "Exercise"

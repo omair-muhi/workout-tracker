@@ -14,7 +14,7 @@ This is a full-stack application that allows users to enter new daily workout an
 ## Usage 
 * To install: `npm install`
 * To run: `npm run start`
-* Access at: 
+* Access at: https://calm-island-94680.herokuapp.com/
 
 ## Screenshot
 
